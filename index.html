@@ -155,7 +155,64 @@ table.sign-table .subheader { text-align: left; font-weight: bold; background: #
 
 <div class="btn-row">
   <button class="btn btn-print" onclick="window.print()">🖨️ พิมพ์ / บันทึก PDF</button>
+  <button class="btn" style="background:#388E3C;color:#fff;" onclick="document.getElementById('pdfFiles').click()">📎 แนบ PDF แล้วรวมไฟล์</button>
+  <input type="file" id="pdfFiles" multiple accept=".pdf" style="display:none" onchange="mergePDFs(this.files)">
   <button class="btn btn-clear" onclick="if(confirm('ล้างข้อมูลทั้งหมด?')){document.querySelectorAll('input[type=text],input[type=date],textarea').forEach(e=>e.value='');document.querySelectorAll('input[type=checkbox]').forEach(e=>e.checked=false)}">🗑️ ล้างข้อมูล</button>
+  <div id="mergeStatus" style="margin-top:8px;font-size:14px;color:#333;"></div>
 </div>
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://unpkg.com/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script>
+async function mergePDFs(files) {
+  const status = document.getElementById('mergeStatus');
+  if (!files.length) return;
+  status.textContent = '⏳ กำลังรวมไฟล์...';
+
+  try {
+    // 1. Capture form as PDF
+    const { jsPDF } = window.jspdf;
+    const page = document.querySelector('.page');
+    const canvas = await html2canvas(page, { scale: 2, useCORS: true });
+    const imgData = canvas.toDataURL('image/jpeg', 0.95);
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdfW = pdf.internal.pageSize.getWidth();
+    const pdfH = pdf.internal.pageSize.getHeight();
+    pdf.addImage(imgData, 'JPEG', 0, 0, pdfW, pdfH);
+    const formBytes = pdf.output('arraybuffer');
+
+    // 2. Merge all PDFs
+    const mergedPdf = await PDFLib.PDFDocument.create();
+
+    // Add form page
+    const formDoc = await PDFLib.PDFDocument.load(formBytes);
+    const formPages = await mergedPdf.copyPages(formDoc, formDoc.getPageIndices());
+    formPages.forEach(p => mergedPdf.addPage(p));
+
+    // Add attached PDFs
+    for (const file of files) {
+      const bytes = await file.arrayBuffer();
+      const doc = await PDFLib.PDFDocument.load(bytes);
+      const pages = await mergedPdf.copyPages(doc, doc.getPageIndices());
+      pages.forEach(p => mergedPdf.addPage(p));
+    }
+
+    // 3. Download
+    const mergedBytes = await mergedPdf.save();
+    const blob = new Blob([mergedBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ใบตรวจรับงาน-รวมเอกสาร.pdf';
+    a.click();
+    URL.revokeObjectURL(url);
+
+    status.textContent = `✅ รวมสำเร็จ! ฟอร์ม + ${files.length} ไฟล์แนบ`;
+  } catch (e) {
+    status.textContent = '❌ เกิดข้อผิดพลาด: ' + e.message;
+  }
+}
+</script>
 </body>
 </html>
