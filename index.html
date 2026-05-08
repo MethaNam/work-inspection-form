@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ใบตรวจรับงาน - IDH-AC-AEA-FM-641015.000</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'TH SarabunPSK', 'Sarabun', sans-serif; font-size: 16px; padding: 10px; background: #eee; }
+.page { width: 210mm; margin: 0 auto; background: #fff; padding: 12mm 15mm 10mm; border: 1px solid #ccc; }
+h1 { text-align: center; font-size: 24px; margin: 6px 0 4px; }
+.header-img { width: 100%; margin-bottom: 4px; }
+.footer-img { width: 100%; margin-top: 8px; }
+
+/* Form layout */
+.right-align { text-align: right; margin-bottom: 4px; }
+.row { display: flex; margin-bottom: 4px; }
+.row .left { flex: 1; display: flex; align-items: baseline; gap: 4px; }
+.row .right { flex: 1; display: flex; align-items: baseline; gap: 4px; }
+label { font-size: 14px; white-space: nowrap; }
+input[type=text], input[type=date], input[type=email], input[type=tel], input[type=number], select {
+  flex: 1; border: none; border-bottom: 1px dotted #000; padding: 1px 4px;
+  font-size: 14px; font-family: inherit; background: #fffde7; min-width: 60px;
+}
+select { background: #fffde7; }
+
+.section-title { font-weight: bold; font-size: 15px; margin: 10px 0 4px; text-decoration: underline; }
+
+/* Two column contact */
+.contact-row { display: flex; gap: 20px; }
+.contact-col { flex: 1; }
+.contact-col .field { display: flex; align-items: baseline; gap: 4px; margin-bottom: 3px; }
+.contact-col .field input { flex: 1; border: none; border-bottom: 1px dotted #000; padding: 1px 4px; font-size: 14px; font-family: inherit; background: #fffde7; }
+
+/* Scope */
+.scope-row { display: flex; gap: 10px; margin-bottom: 8px; }
+.scope-left { flex: 2; }
+.scope-right { flex: 1; }
+.scope-row textarea { width: 100%; min-height: 140px; border: 1px solid #999; padding: 4px; font-size: 14px; font-family: inherit; resize: vertical; background: #fffde7; }
+.scope-row .lbl { font-size: 13px; margin-bottom: 3px; }
+
+/* Document checklist - circles */
+.doc-section { margin: 8px 0; }
+.doc-section h3 { font-size: 14px; text-decoration: underline; margin-bottom: 4px; }
+.doc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px 8px; font-size: 13px; }
+.doc-grid label { display: flex; align-items: center; gap: 3px; cursor: pointer; }
+.doc-grid input[type=checkbox] { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; border: 1.5px solid #000; border-radius: 50%; cursor: pointer; flex-shrink: 0; }
+.doc-grid input[type=checkbox]:checked { background: #000; }
+.doc-grid .other-input { border: none; border-bottom: 1px dotted #000; width: 70px; font-size: 12px; font-family: inherit; background: #fffde7; }
+
+/* Signature table */
+.sign-section { margin-top: 8px; }
+.sign-section h3 { font-size: 14px; text-decoration: underline; margin-bottom: 4px; }
+table.sign-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.sign-table th, table.sign-table td { border: 1px solid #000; padding: 3px 5px; }
+table.sign-table th { background: #f0f0f0; text-align: center; }
+table.sign-table td:first-child { text-align: left; white-space: nowrap; }
+table.sign-table td input { border: none; width: 100%; text-align: center; font-size: 13px; font-family: inherit; background: #fffde7; }
+table.sign-table .subheader { text-align: left; font-weight: bold; background: #f9f9f9; font-size: 12px; }
+
+.btn-row { text-align: center; margin: 16px auto; max-width: 210mm; }
+.btn { padding: 10px 28px; font-size: 15px; border: none; border-radius: 4px; cursor: pointer; margin: 0 8px; font-family: inherit; }
+.btn-print { background: #1976D2; color: #fff; }
+.btn-clear { background: #d32f2f; color: #fff; }
+.btn:hover { opacity: 0.85; }
+
+@media print {
+  body { background: #fff; padding: 0; }
+  .page { border: none; padding: 8mm 12mm; box-shadow: none; }
+  .btn-row { display: none; }
+  input, select, textarea { background: transparent !important; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <!-- Header -->
+  <img src="logo-top.png" class="header-img" alt="DoHome Header">
+
+  <h1>ใบตรวจรับงาน</h1>
+
+  <!-- วัน/เดือน/ปี ที่รับมอบ -->
+  <div class="right-align">
+    <label>วัน/เดือน/ปี ที่รับมอบ</label>
+    <input type="date" style="width:160px;display:inline-block;">
+  </div>
+
+  <!-- สาขา -->
+  <div class="row">
+    <div class="left"><label>สาขา</label><select id="branch"><option value="">-- เลือกสาขา --</option><option>สำนักงานใหญ่บางพูน</option><option>รังสิต</option><option>บางนา</option><option>พระราม 2</option><option>รามอินทรา</option><option>ราชพฤกษ์</option><option>บางใหญ่</option><option>ศรีนครินทร์</option><option>ลาดพร้าว</option><option>เชียงใหม่</option><option>ขอนแก่น</option><option>นครราชสีมา</option><option>อุดรธานี</option><option>หาดใหญ่</option><option>ภูเก็ต</option><option>ชลบุรี</option><option>ระยอง</option><option>พิษณุโลก</option><option>อื่นๆ</option></select></div>
+  </div>
+
+  <!-- ชื่องาน / วันที่เริ่มต้น-สิ้นสุด -->
+  <div class="row">
+    <div class="left"><label>ชื่องาน</label><input type="text"></div>
+    <div class="right"><label>วันที่เริ่มต้น – สิ้นสุด</label><input type="text"></div>
+  </div>
+  <!-- ประเภทงาน / สถานที่ -->
+  <div class="row">
+    <div class="left"><label>ประเภทงาน</label><input type="text"></div>
+    <div class="right"><label>สถานที่</label><input type="text"></div>
+  </div>
+  <!-- เลขที่ IO / มูลค่างาน -->
+  <div class="row">
+    <div class="left"><label>เลขที่ IO</label><input type="text"></div>
+    <div class="right"><label>มูลค่างาน (บาท)</label><input type="text"></div>
+  </div>
+
+  <!-- ผู้ส่งมอบงาน / ผู้รับงาน -->
+  <div class="contact-row">
+    <div class="contact-col">
+      <div class="section-title">ผู้ส่งมอบงาน (ผู้รับจ้าง)</div>
+      <div class="field"><label>บริษัท/ห้าง/ร้าน</label><input type="text"></div>
+      <div class="field"><label>ชื่อผู้ติดต่อ</label><input type="text"></div>
+      <div class="field"><label>เบอร์ติดต่อ Tel:</label><input type="text"> <label>Mobile:</label><input type="text"></div>
+      <div class="field"><label>E-mail</label><input type="text"></div>
+    </div>
+    <div class="contact-col">
+      <div class="section-title">ผู้รับงาน (บ.ดูโฮม)</div>
+      <div class="field"><label>บริษัท/ห้าง/ร้าน</label><input type="text" value="เลขที่ 88/111 หมู่ 3 ตำบลบางพูน อำเภอเมืองปทุมธานี จังหวัดปทุมธานี 12000"></div>
+      <div class="field"><label>ชื่อผู้ติดต่อ</label><input type="text"></div>
+      <div class="field"><label>เบอร์ติดต่อ</label><input type="text"></div>
+      <div class="field"><label>E-mail</label><input type="text"></div>
+    </div>
+  </div>
+
+  <!-- ขอบเขตการดำเนินงาน -->
+  <div class="section-title">ขอบเขตการดำเนินงาน</div>
+  <div class="scope-row">
+    <div class="scope-left">
+      <div class="lbl">รายละเอียดงานที่จ้าง (กรณีมีแผนงานสามารถใช้เป็นเอกสารแนบได้)</div>
+      <textarea></textarea>
+    </div>
+    <div class="scope-right">
+      <div class="lbl">ผลดำเนินงาน</div>
+      <textarea></textarea>
+    </div>
+  </div>
+
+  <!-- เอกสารส่งมอบงาน -->
+  <div class="doc-section">
+    <h3>เอกสารส่งมอบงาน</h3>
+    <div class="doc-grid">
+      <label><input type="checkbox"> 1.รูปภาพ</label>
+      <label><input type="checkbox"> 3.แผนที่</label>
+      <label><input type="checkbox"> 5.check list การตรวจสอบ</label>
+      <label><input type="checkbox"> 7.ไฟล์/CD/Flash Drive (ระบุ)</label>
+      <label><input type="checkbox"> 9.รายงานทรัพย์สิน (ถ้ามี)</label>
+      <label><input type="checkbox"> 2.ตารางแผนงาน</label>
+      <label><input type="checkbox"> 4.คู่มือ</label>
+      <label><input type="checkbox"> 6.ใบรับประกัน/ใบอนุญาต</label>
+      <label><input type="checkbox"> 8.แบบแปลน (ถ้ามี)</label>
+      <label><input type="checkbox"> 10.อื่นๆ <input type="text" class="other-input"></label>
+    </div>
+  </div>
+
+  <!-- ลงชื่อ/ส่ง/รับมอบงาน -->
+  <div class="sign-section">
+    <h3>ลงชื่อ/ส่ง/รับมอบงาน</h3>
+    <table class="sign-table">
+      <thead>
+        <tr><th style="width:30%">รายการ</th><th>ลายเซ็นต์/วดป.</th><th>ชื่อ-สกุล</th><th>ตำแหน่ง</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>ผู้ส่งมอบงาน (ผู้รับจ้าง)</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+        <tr><td class="subheader" colspan="4">ผู้รับมอบงาน (บ.ดูโฮม) **ลงชื่อเฉพาะที่เกี่ยวข้อง</td></tr>
+        <tr><td>ตัวแทนฝ่าย/แผนก เจ้าของงาน</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+        <tr><td>ผู้ควบคุมงาน</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+        <tr><td>ฝ่ายอาคารสถานที่</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+        <tr><td>ฝ่าย Loss</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+        <tr><td>ผจก. สาขา</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+        <tr><td>ผู้บริหารสายงาน</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Footer -->
+  <img src="logo-bottom.png" class="footer-img" alt="www.dohome.co.th">
+</div>
+
+<div class="btn-row">
+  <button class="btn btn-print" onclick="window.print()">🖨️ พิมพ์ / บันทึก PDF</button>
+  <button class="btn btn-clear" onclick="if(confirm('ล้างข้อมูลทั้งหมด?')){document.querySelectorAll('input[type=text],input[type=date],textarea').forEach(e=>e.value='');document.querySelectorAll('input[type=checkbox]').forEach(e=>e.checked=false)}">🗑️ ล้างข้อมูล</button>
+</div>
+</body>
+</html>
