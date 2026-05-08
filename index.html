@@ -163,6 +163,7 @@ table.sign-table .subheader { text-align: left; font-weight: bold; background: #
     <iframe id="previewFrame" style="width:100%;height:500px;border:1px solid #ccc;border-radius:4px;"></iframe>
     <div style="margin-top:8px;">
       <button class="btn" style="background:#388E3C;color:#fff;" onclick="downloadMerged()">💾 ดาวน์โหลด PDF</button>
+      <button class="btn btn-print" onclick="printMerged()">🖨️ พิมพ์</button>
       <button class="btn" style="background:#757575;color:#fff;" onclick="document.getElementById('previewArea').style.display='none'">✖ ปิด Preview</button>
     </div>
   </div>
@@ -223,6 +224,12 @@ function downloadMerged() {
   a.href = mergedBlobUrl;
   a.download = 'ใบตรวจรับงาน-รวมเอกสาร.pdf';
   a.click();
+}
+
+function printMerged() {
+  if (!mergedBlobUrl) return;
+  const w = window.open(mergedBlobUrl);
+  w.onload = () => { w.print(); };
 }
 </script>
 </body>
