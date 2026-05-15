@@ -44,7 +44,9 @@ table.sign-table { width: 100%; border-collapse: collapse; font-size: 12px; }
 table.sign-table th, table.sign-table td { border: 1px solid #000; padding: 2px 4px; }
 table.sign-table th { background: #f0f0f0; text-align: center; font-size: 11px; }
 table.sign-table td:first-child { text-align: left; white-space: nowrap; }
+table.sign-table td:last-child { font-size: 11px; word-break: break-word; }
 table.sign-table td input { border: none; width: 100%; text-align: center; font-size: 12px; font-family: inherit; background: #fffde7; }
+table.sign-table td:last-child input { font-size: 10px; }
 table.sign-table .subheader { text-align: left; font-weight: bold; background: #f9f9f9; font-size: 11px; }
 .btn-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 16px auto; max-width: 210mm; }
 .btn { padding: 10px 24px; font-size: 14px; border: none; border-radius: 6px; cursor: pointer; font-family: inherit; display: inline-flex; align-items: center; gap: 6px; }
@@ -135,7 +137,7 @@ table.sign-table .subheader { text-align: left; font-weight: bold; background: #
     <h3>ลงชื่อ/ส่ง/รับมอบงาน</h3>
     <table class="sign-table">
       <thead>
-        <tr><th style="width:28%">รายการ</th><th>ลายเซ็นต์/วดป.</th><th>ชื่อ-สกุล</th><th>ตำแหน่ง</th></tr>
+        <tr><th style="width:22%">รายการ</th><th style="width:20%">ลายเซ็นต์/วดป.</th><th style="width:18%">ชื่อ-สกุล</th><th style="width:40%">ตำแหน่ง</th></tr>
       </thead>
       <tbody>
         <tr><td>ผู้ส่งมอบงาน (ผู้รับจ้าง)</td><td><input type="text"></td><td><input type="text"></td><td><input type="text"></td></tr>
